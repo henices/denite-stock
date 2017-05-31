@@ -14,7 +14,6 @@ class Source(Base):
     def __init__(self, vim):
         super().__init__(vim)
         self.name = 'stock'
-        self.kind = 'file'
 
     def on_init(self, context):
         context['http'] = urllib3.PoolManager()
@@ -33,7 +32,7 @@ class Source(Base):
             context['stock_code'] = items[0].split(',')[3]
 
         if len(items) > 1:
-            print(':')
+            print(' \n')
             for i in range(0, len(items)):
                 item = items[i]
                 print('%d: %s' % (i, item.split(',')[4]))
