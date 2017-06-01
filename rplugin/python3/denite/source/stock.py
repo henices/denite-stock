@@ -9,6 +9,11 @@ import os
 import urllib3
 import re
 
+STOCK_HIGHLIGHT_SYNTAX = [
+    {'name': 'keyword', 'link': 'Identifier', 're': ':\|\*'},
+    {'name': 'up', 'link': 'Float', 're': ' \(\d\|\.\)\+%'},
+    {'name': 'down',  'link': 'String', 're': ' \-\(\d\|\.\)\+ %'}
+]
 
 class Source(Base):
     def __init__(self, vim):
@@ -20,6 +25,14 @@ class Source(Base):
 
     def on_close(self, context):
         pass
+
+    def highlight(self):
+        for syn in STOCK_HIGHLIGHT_SYNTAX:
+            self.vim.command(
+                'syntax match {0}_{1} /{2}/ contained containedin={0}'.format(
+                    self.syntax_name, syn['name'], syn['re']))
+            self.vim.command('highlight default link {0}_{1} {2}'.format(
+                    self.syntax_name, syn['name'], syn['link']))
 
     def get_code(self, context):
         code  = util.input(self.vim, context, 'Stock code: ')
