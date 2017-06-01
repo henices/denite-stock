@@ -31,13 +31,14 @@ class Source(Base):
         if len(items) == 1:
             context['stock_code'] = items[0].split(',')[3]
 
+        prompt = ''
         if len(items) > 1:
-            print(' \n')
             for i in range(0, len(items)):
                 item = items[i]
-                print('%d: %s' % (i, item.split(',')[4]))
+                prompt += '%d: %s\n' % (i, item.split(',')[4])
 
-            stock_idx = util.input(self.vim, context, 'Stock code index: ')
+            stock_idx = util.input(self.vim,
+                    context, '\n' + prompt + 'Stock code index: ')
             context['stock_code'] = items[int(stock_idx)].split(',')[3]
 
     def get_hq(self, context):
