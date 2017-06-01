@@ -11,7 +11,7 @@ import re
 
 STOCK_HIGHLIGHT_SYNTAX = [
     {'name': 'keyword', 'link': 'Identifier', 're': ':\|\*'},
-    {'name': 'up', 'link': 'Float', 're': ' \(\d\|\.\)\+%'},
+    {'name': 'up', 'link': 'Float', 're': ' \(\d\|\.\)\+ %'},
     {'name': 'down',  'link': 'String', 're': ' \-\(\d\|\.\)\+ %'}
 ]
 
