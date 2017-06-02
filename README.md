@@ -23,5 +23,5 @@ call dein#add('henices/denite-stock')
 ## Usage
 
 ```
-Denite stock
+:Denite stock
 ```
