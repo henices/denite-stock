@@ -12,7 +12,7 @@ import re
 STOCK_HIGHLIGHT_SYNTAX = [
     {'name': 'keyword', 'link': 'Identifier', 're': ':\|\*'},
     {'name': 'up', 'link': 'Float', 're': ' \(\d\|\.\)\+ %'},
-    {'name': 'down',  'link': 'String', 're': ' \-\(\d\|\.\)\+ %'}
+    {'name': 'down',  'link': 'String', 're': ' \-\(\d\|\.\)\+ %'},
 ]
 
 class Source(Base):
@@ -53,7 +53,9 @@ class Source(Base):
                 item = items[i]
                 info = item.split('~')
                 prompt += '%d: %s\n' % \
-                        (i, info[2].encode('utf-8').decode('unicode_escape'))
+                        (i, 
+                        info[2].encode('utf-8').decode('unicode_escape') +
+                        ' %s' % (info[0] + info[1]))
 
             stock_idx = util.input(self.vim,
                     context, '\n' + prompt + 'Stock code index: ')
@@ -126,13 +128,13 @@ class Source(Base):
         #candidates.append({'word': "市值 : "  + info[45]})
         #candidates.append({'word': "P/E  : "  + info[39]})
         #candidates.append({'word': '成交 : '  + info[29]})
-        candidates.append({'word': '--------------------'})
+        candidates.append({'word': '~~~~~~~~~~~~~'})
         candidates.append({'word': '卖5  : ' + info[28]})
         candidates.append({'word': '卖4  : ' + info[26]})
         candidates.append({'word': '卖3  : ' + info[24]})
         candidates.append({'word': '卖2  : ' + info[22]})
         candidates.append({'word': '卖1  : ' + info[20]})
-        candidates.append({'word': '--------------------'})
+        candidates.append({'word': '-------------'})
         candidates.append({'word': '买1  : ' + info[10]})
         candidates.append({'word': '买2  : ' + info[12]})
         candidates.append({'word': '买3  : ' + info[14]})
